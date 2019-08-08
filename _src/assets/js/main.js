@@ -39,25 +39,24 @@ function getImage(array, i) {
 //Function to save faves in an array
 function saveFavs (event) {
   const currentLi = event.currentTarget;
-  /*   const picShow = currentLi.querySelector('.show--image').src;
-  const nameShow = currentLi.querySelector('.show--title').innerHTML; */
-  const currentLiId = currentLi.getAttribute('data-id');
+  const picShow = currentLi.querySelector('.show--image').src;
+  const nameShow = currentLi.querySelector('.show--title').innerHTML;
+  const idShow = currentLi.getAttribute('data-id');
   currentLi.classList.toggle('faveShow');
-
+/*   const faveShowSaved = {'id': idShow, 'pic': picShow, 'name': nameShow};
+ */
   if (currentLi.classList.contains('faveShow') === true){
-  	if (myFavs.includes(currentLiId) !== true) {
-    	myFavs.push(currentLiId);
+  	if (myFavs.includes(idShow) !== true) {
+    	myFavs.push(idShow);
     }
   } else {
-    const index = myFavs.indexOf(currentLiId);
+    const index = myFavs.indexOf(idShow);
     if (index > -1) {
       myFavs.splice(index, 1);
     }
   }
   console.log(myFavs);
 }
-
-
 
 //Function to click on any li and got it selected as fave
 function markFavs() {
