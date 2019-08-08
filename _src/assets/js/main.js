@@ -70,3 +70,16 @@ function preshEnter(event) {
 
 input.addEventListener('keydown', preshEnter);
 
+
+
+//function to add favs to array
+const hola = 'hola';
+const adios = 'adios';
+
+let myFaves = [
+  {image: 'aqui va la url',
+    title: 'aquí tu cara' }
+];
+
+myFaves.push({hola, adios});
+
