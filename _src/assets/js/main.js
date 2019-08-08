@@ -22,3 +22,11 @@ function getShow (array){
   }
   list.appendChild();
 }
+
+
+const show = document.createElement('li');
+const image = document.createElement('img');
+const title = document.createElement('h2');
+const titleContent = document.createTextNode('');
+show.appendChild(image);
+show.appendChild(title);
