@@ -7,7 +7,7 @@ const input = document.querySelector('.input--serie');
 const button = document.querySelector('.btn');
 
 //Array to save favorites shows
-const myFavs = [];
+let myFavs = [];
 
 //function so we can use enter to valid the value
 function preshEnter(event) {
@@ -43,19 +43,24 @@ function saveFavs (event) {
   const nameShow = currentLi.querySelector('.show--title').innerHTML;
   const idShow = currentLi.getAttribute('data-id');
   currentLi.classList.toggle('faveShow');
-/*   const faveShowSaved = {'id': idShow, 'pic': picShow, 'name': nameShow};
- */
+  const faveShowSaved = {'id': idShow, 'pic': picShow, 'name': nameShow};
+
   if (currentLi.classList.contains('faveShow') === true){
-  	if (myFavs.includes(idShow) !== true) {
-    	myFavs.push(idShow);
+    let favShows = myFavs.find(faveShowSaved => faveShowSaved.id === idShow);
+    if (favShows === undefined) {
+      myFavs.push(faveShowSaved);
+    } else {
+      const index = myFavs.indexOf(faveShowSaved);
+      if (index > -1) {
+        myFavs.splice(index, 1);
+      }
     }
   } else {
-    const index = myFavs.indexOf(idShow);
-    if (index > -1) {
-      myFavs.splice(index, 1);
-    }
+    myFavs = [];
+    myFavs.push(faveShowSaved);
   }
-  console.log(myFavs);
+    console.log(myFavs);
+
 }
 
 //Function to click on any li and got it selected as fave
