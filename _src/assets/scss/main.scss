@@ -3,4 +3,20 @@
 .page {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: blue;
+  padding: 60px 40px;
+
+  ::first-letter{
+    text-transform: capitalize;
+  }
+}
+
+.series__list {
+  list-style: none;
+}
+.show--li {
+  text-align: center;
+  padding: 15px;
+}
+.faveShow {
+  background-color: pink;
 }
