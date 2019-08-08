@@ -7,7 +7,14 @@ const input = document.querySelector('.input--serie');
 const button = document.querySelector('.btn');
 
 //Array to save favorites shows
-let myFaves = [];
+const myFavs = [];
+
+//function so we can use enter to valid the value
+function preshEnter(event) {
+  if (event.keyCode === 13) {
+    getName();
+  }
+}
 
 function getName() {
   const name = input.value.replace(/\s+/gi, '-'); //to put - instead of spaces
@@ -29,10 +36,43 @@ function getImage(array, i) {
   }
 }
 
+//Function to save faves in an array
+function saveFavs (event) {
+  const currentLi = event.currentTarget;
+  /*   const picShow = currentLi.querySelector('.show--image').src;
+  const nameShow = currentLi.querySelector('.show--title').innerHTML; */
+  const currentLiId = currentLi.getAttribute('data-id');
+  currentLi.classList.toggle('faveShow');
+
+  if (currentLi.classList.contains('faveShow') === true){
+  	if (myFavs.includes(currentLiId) !== true) {
+    	myFavs.push(currentLiId);
+    }
+  } else {
+    const index = myFavs.indexOf(currentLiId);
+    if (index > -1) {
+      myFavs.splice(index, 1);
+    }
+  }
+  console.log(myFavs);
+}
+
+
+
+//Function to click on any li and got it selected as fave
+function markFavs() {
+  const showLi = document.querySelectorAll('.show--li');
+
+  for (const item of showLi) {
+    item.addEventListener('click', saveFavs);
+  }
+}
+
 function getShow (array){
 
   for (let i = 0; i < array.length; i++) {
     const show = document.createElement('li');
+    show.setAttribute('data-id', array[i].show.id);
     show.classList.add('show--li');
     const image = document.createElement('img');
     image.classList.add('show--image');
@@ -47,40 +87,8 @@ function getShow (array){
     show.appendChild(image);
     list.appendChild(show);
   }
-
-  //Function to click on any li and got it selected as fave
-  const showLi = document.querySelectorAll('.show--li');
-
-  function markFave (event) {
-    const currentLi = event.currentTarget;
-    const picShow = currentLi.querySelector('.show--image').src;
-    const nameShow = currentLi.querySelector('.show--title').innerHTML;
-    currentLi.classList.toggle('faveShow');
-
-    if (currentLi.classList.contains('faveShow')){
-      myFaves.push({picShow, nameShow});
-    } else {
-      const index = myFaves.indexOf(currentLi);
-      if (index > -1) {
-        myFaves.splice(index, 1);
-      }
-    }
-    console.log(myFaves);
-  }
-
-  for (const item of showLi) {
-    item.addEventListener('click', markFave);
-  }
+  markFavs();
 }
 
 button.addEventListener('click', getName);
-
-
-//function so we can use enter to valid the value
-function preshEnter(event) {
-  if (event.keyCode === 13) {
-    getName();
-  }
-}
-
 input.addEventListener('keydown', preshEnter);
