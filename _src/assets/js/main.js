@@ -6,6 +6,9 @@ const list = document.querySelector('.series__list');
 const input = document.querySelector('.input--serie');
 const button = document.querySelector('.btn');
 
+//Array to save favorites shows
+let myFaves = [];
+
 function getName() {
   const name = input.value.replace(/\s+/gi, '-'); //to put - instead of spaces
   const endpoint = urlBase + name;
@@ -46,20 +49,32 @@ function getShow (array){
   }
 
   //Function to click on any li and got it selected as fave
-
   const showLi = document.querySelectorAll('.show--li');
 
   function markFave (event) {
     const currentLi = event.currentTarget;
+    const picShow = currentLi.querySelector('.show--image').src;
+    const nameShow = currentLi.querySelector('.show--title').innerHTML;
     currentLi.classList.toggle('faveShow');
 
+    if (currentLi.classList.contains('faveShow')){
+      myFaves.push({picShow, nameShow});
+    } else {
+      const index = myFaves.indexOf(currentLi);
+      if (index > -1) {
+        myFaves.splice(index, 1);
+      }
+    }
+    console.log(myFaves);
   }
+
   for (const item of showLi) {
     item.addEventListener('click', markFave);
   }
 }
 
 button.addEventListener('click', getName);
+
 
 //function so we can use enter to valid the value
 function preshEnter(event) {
@@ -69,17 +84,3 @@ function preshEnter(event) {
 }
 
 input.addEventListener('keydown', preshEnter);
-
-
-
-//function to add favs to array
-const hola = 'hola';
-const adios = 'adios';
-
-let myFaves = [
-  {image: 'aqui va la url',
-    title: 'aquí tu cara' }
-];
-
-myFaves.push({hola, adios});
-
