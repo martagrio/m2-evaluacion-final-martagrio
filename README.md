@@ -2,6 +2,8 @@
 
 Ejercicio para evaluar los conocimientos adquiridos de JavaScript durante el módulo 2 de Adalab.
 
+## Marta García del Río
+
 ## Guía de inicio rápido
 Necesitarás instalar [Node.js](https://nodejs.org/) y [Gulp](https://gulpjs.com) para trabajar con este Starter Kit, luego:
 1. Descarga o clona el repositorio
