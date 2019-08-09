@@ -6,10 +6,8 @@ const list = document.querySelector('.series__list');
 const favsList = document.querySelector('.favs--series__list');
 const input = document.querySelector('.input--serie');
 const button = document.querySelector('.btn');
-
 //Array with saved show in localStorage
 const localShowSaved = JSON.parse(localStorage.getItem('obj'));
-
 //Array to save favorites shows
 let myFavs = [];
 
@@ -82,7 +80,6 @@ function saveFavs (event) {
       myFavs.push(faveShowSaved);
       writeFavs();
     }
-
   } else {
     let favShows = myFavs.find(faveShowSaved => faveShowSaved.id === idShow);
     const index = myFavs.indexOf(favShows);
@@ -91,11 +88,6 @@ function saveFavs (event) {
     }
     writeFavs();
   }
-  /*  } else {
-    const index = myFavs.indexOf(faveShowSaved);
-    if (index > -1) {
-      myFavs.splice(index, 1);
-    } */
 }
 
 function writeFavs () {
