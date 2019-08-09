@@ -9,6 +9,7 @@ const button = document.querySelector('.btn');
 
 //Array to save favorites shows
 let myFavs = [];
+let localMyFavs = [];
 
 //function so we can use enter to valid the value
 function preshEnter(event) {
@@ -79,32 +80,12 @@ function saveFavs (event) {
       favShow.appendChild(favImage);
       favsList.appendChild(favShow);
     }
-    console.log(myFavs);
+    localStorage.setItem('obj', JSON.stringify(myFavs));
+
   }
-  localStorage.setItem('obj', JSON.stringify(myFavs));
+  const localShowSaved = JSON.parse(localStorage.getItem('obj'));
+  localMyFavs = localShowSaved;
 }
-const localShowSaved = JSON.parse(localStorage.getItem('obj'));
-
-favsList.appendChild(localShowSaved);
-
-    for (let i = 0; i < myFavs.length; i++) {
-      const favShow = document.createElement('li');
-      favShow.setAttribute('data-id', myFavs[i].id);
-      favShow.classList.add('fav-show--li');
-      const favImage = document.createElement('img');
-      favImage.classList.add('fav-show--image');
-      const favTitle = document.createElement('h3');
-      favTitle.classList.add('fav-show--title');
-      const favTitleContent = document.createTextNode(myFavs[i].name);
-      favTitle.appendChild(favTitleContent);
-      favShow.appendChild(favTitle);
-
-      favImage.src= myFavs[i].pic;
-      favImage.alt = myFavs[i].name;
-      favShow.appendChild(favImage);
-      favsList.appendChild(favShow);
-    }
-
 
 //Function to click on any li and got it selected as fave
 function markFavs() {
