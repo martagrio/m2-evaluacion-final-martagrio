@@ -7,9 +7,33 @@ const favsList = document.querySelector('.favs--series__list');
 const input = document.querySelector('.input--serie');
 const button = document.querySelector('.btn');
 
+//Array with saved show in localStorage
+const localShowSaved = JSON.parse(localStorage.getItem('obj'));
+
 //Array to save favorites shows
 let myFavs = [];
-let localMyFavs = [];
+myFavs = localShowSaved;
+printFavs();
+
+function printFavs () {
+  for (let i = 0; i < myFavs.length; i++) {
+    const favShow = document.createElement('li');
+    favShow.setAttribute('data-id', myFavs[i].id);
+    favShow.classList.add('fav-show--li');
+    const favImage = document.createElement('img');
+    favImage.classList.add('fav-show--image');
+    const favTitle = document.createElement('h3');
+    favTitle.classList.add('fav-show--title');
+    const favTitleContent = document.createTextNode(myFavs[i].name);
+    favTitle.appendChild(favTitleContent);
+    favShow.appendChild(favTitle);
+
+    favImage.src= myFavs[i].pic;
+    favImage.alt = myFavs[i].name;
+    favShow.appendChild(favImage);
+    favsList.appendChild(favShow);
+  }
+}
 
 //function so we can use enter to valid the value
 function preshEnter(event) {
@@ -83,8 +107,6 @@ function saveFavs (event) {
     localStorage.setItem('obj', JSON.stringify(myFavs));
 
   }
-  const localShowSaved = JSON.parse(localStorage.getItem('obj'));
-  localMyFavs = localShowSaved;
 }
 
 //Function to click on any li and got it selected as fave
