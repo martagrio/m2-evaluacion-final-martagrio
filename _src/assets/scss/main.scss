@@ -4,13 +4,14 @@
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: blue;
   padding: 60px 40px;
+  background-color: aqua;
 
   ::first-letter{
     text-transform: capitalize;
   }
 }
 
-.series__list {
+.series__list, .favs--series__list {
   list-style: none;
 }
 .show--li {
@@ -25,14 +26,16 @@
 
 .shows__box {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   text-align: center;
 }
 
-.favs__box {
-  background-color: yellow;
+.favs__box, .searched__box {
+width: auto;
+margin: 30px 0;
 }
 
-.searched__box {
-    background-color: green;
+.title {
+  margin: 20px 0;
 }
+
