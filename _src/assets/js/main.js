@@ -3,6 +3,7 @@
 const urlBase = 'http://api.tvmaze.com/search/shows?q=';
 const defaultImage = 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV%20SHOW';
 const list = document.querySelector('.series__list');
+const favsList = document.querySelector('.favs--series__list');
 const input = document.querySelector('.input--serie');
 const button = document.querySelector('.btn');
 
@@ -55,12 +56,31 @@ function saveFavs (event) {
         myFavs.splice(index, 1);
       }
     }
-  } else {
-    myFavs = [];
-    myFavs.push(faveShowSaved);
-  }
-    console.log(myFavs);
+    /*  } else {
+    const index = myFavs.indexOf(faveShowSaved);
+    if (index > -1) {
+      myFavs.splice(index, 1);
+    } */
 
+    for (let i = 0; i < myFavs.length; i++) {
+      const favShow = document.createElement('li');
+      favShow.setAttribute('data-id', myFavs[i].id);
+      favShow.classList.add('fav-show--li');
+      const favImage = document.createElement('img');
+      favImage.classList.add('fav-show--image');
+      const favTitle = document.createElement('h3');
+      favTitle.classList.add('fav-show--title');
+      const favTitleContent = document.createTextNode(myFavs[i].name);
+      favTitle.appendChild(favTitleContent);
+      favShow.appendChild(favTitle);
+
+      favImage.src= myFavs[i].pic;
+      favImage.alt = myFavs[i].name;
+      favShow.appendChild(favImage);
+      favsList.appendChild(favShow);
+    }
+    console.log(myFavs);
+  }
 }
 
 //Function to click on any li and got it selected as fave
@@ -80,7 +100,7 @@ function getShow (array){
     show.classList.add('show--li');
     const image = document.createElement('img');
     image.classList.add('show--image');
-    const title = document.createElement('h2');
+    const title = document.createElement('h3');
     title.classList.add('show--title');
     const titleContent = document.createTextNode(array[i].show.name);
     title.appendChild(titleContent);

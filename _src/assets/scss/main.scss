@@ -22,3 +22,17 @@
   background-color: pink;
   color: white;
 }
+
+.shows__box {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.favs__box {
+  background-color: yellow;
+}
+
+.searched__box {
+    background-color: green;
+}
