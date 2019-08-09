@@ -80,39 +80,47 @@ function saveFavs (event) {
     let favShows = myFavs.find(faveShowSaved => faveShowSaved.id === idShow);
     if (favShows === undefined) {
       myFavs.push(faveShowSaved);
-    } else {
-      const index = myFavs.indexOf(faveShowSaved);
-      if (index > -1) {
-        myFavs.splice(index, 1);
-      }
+      writeFavs();
     }
-    /*  } else {
+
+  } else {
+    let favShows = myFavs.find(faveShowSaved => faveShowSaved.id === idShow);
+    const index = myFavs.indexOf(favShows);
+    if (index > -1) {
+      myFavs.splice(index, 1);
+    }
+    writeFavs();
+  }
+  /*  } else {
     const index = myFavs.indexOf(faveShowSaved);
     if (index > -1) {
       myFavs.splice(index, 1);
     } */
-
-    for (let i = 0; i < myFavs.length; i++) {
-      const favShow = document.createElement('li');
-      favShow.setAttribute('data-id', myFavs[i].id);
-      favShow.classList.add('fav-show--li');
-      const favImage = document.createElement('img');
-      favImage.classList.add('fav-show--image');
-      const favTitle = document.createElement('h3');
-      favTitle.classList.add('fav-show--title');
-      const favTitleContent = document.createTextNode(myFavs[i].name);
-      favTitle.appendChild(favTitleContent);
-      favShow.appendChild(favTitle);
-
-      favImage.src= myFavs[i].pic;
-      favImage.alt = myFavs[i].name;
-      favShow.appendChild(favImage);
-      favsList.appendChild(favShow);
-    }
-    localStorage.setItem('obj', JSON.stringify(myFavs));
-
-  }
 }
+
+function writeFavs () {
+  favsList.innerHTML = '';
+  for (let i = 0; i < myFavs.length; i++) {
+    const favShow = document.createElement('li');
+    favShow.setAttribute('data-id', myFavs[i].id);
+    favShow.classList.add('fav-show--li');
+    const favImage = document.createElement('img');
+    favImage.classList.add('fav-show--image');
+    const favTitle = document.createElement('h3');
+    favTitle.classList.add('fav-show--title');
+    const favTitleContent = document.createTextNode(myFavs[i].name);
+    favTitle.appendChild(favTitleContent);
+    favShow.appendChild(favTitle);
+
+    favImage.src= myFavs[i].pic;
+    favImage.alt = myFavs[i].name;
+    favShow.appendChild(favImage);
+    favsList.appendChild(favShow);
+  }
+
+  localStorage.setItem('obj', JSON.stringify(myFavs));
+}
+
 
 //Function to click on any li and got it selected as fave
 function markFavs() {
