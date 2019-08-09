@@ -13,11 +13,10 @@ const localShowSaved = JSON.parse(localStorage.getItem('obj'));
 //Array to save favorites shows
 let myFavs = [];
 
-if (localShowSaved !== null){
+if (myFavs === null && localShowSaved !== null){
   myFavs = localShowSaved;
   printFavs();
 } else {
-  getName();
 }
 
 function printFavs () {
