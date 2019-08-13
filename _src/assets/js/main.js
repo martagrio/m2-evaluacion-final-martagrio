@@ -6,6 +6,8 @@ const list = document.querySelector('.series__list');
 const favsList = document.querySelector('.favs--series__list');
 const input = document.querySelector('.input--serie');
 const button = document.querySelector('.btn');
+const results = document.querySelector('.results__number');
+const numbers = [4, 7, 11];
 //Array with saved show in localStorage
 const localShowSaved = JSON.parse(localStorage.getItem('obj'));
 //Array to save favorites shows
@@ -37,7 +39,19 @@ function printFavs () {
     favsList.appendChild(favShow);
   }
 }
+//Function to check if number of results is greater, lesser or equal to numbers Array
+function showNumber() {
+  const number = parseInt(results.innerHTML);
 
+  for (let i = 0; i < numbers.length; i++){
+    if (number >= numbers[i]) {
+      console.log(`Hay ${number} resultados, y es mayor o igual que ${numbers[i]}`);
+    } else {
+      console.log(`Hay ${number} resultados, y es menor que ${numbers[i]}`);
+    }
+  }
+
+}
 //function so we can use enter to valid the value
 function preshEnter(event) {
   if (event.keyCode === 13) {
@@ -134,16 +148,25 @@ function getShow (array){
     const title = document.createElement('h3');
     title.classList.add('show--title');
     const titleContent = document.createTextNode(array[i].show.name);
+    const type = document.createElement('p');
+    const typeContent = document.createTextNode(array[i].show.type);
     title.appendChild(titleContent);
+    type.appendChild(typeContent);
     show.appendChild(title);
+    show.appendChild(type);
 
     image.src= getImage(array, i);
     image.alt = array[i].show.name;
     show.appendChild(image);
     list.appendChild(show);
   }
+  results.innerHTML = array.length;
   markFavs();
 }
 
 button.addEventListener('click', getName);
 input.addEventListener('keydown', preshEnter);
+
+
+
+results.addEventListener('click', showNumber);
